@@ -1,0 +1,10 @@
+type: grid
+cards:
+  - type: iframe
+    url: https://www.feuerwehr-krems.at/CodePages/Wastl/wastlmain/ShowOverview.asp
+    aspect_ratio: 100%
+    title: Operational Overview
+    grid_options:
+      columns: 18
+      rows: 8
+column_span: 2
