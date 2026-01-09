@@ -1,7 +1,7 @@
 # Fire Department Info (Austria)
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
-[![version](https://img.shields.io/badge/version-1.2.1-blue.svg)]()
+[![version](https://img.shields.io/badge/version-2.1.0-blue.svg)]()
 [![Maintainer](https://img.shields.io/badge/maintainer-acdcnow-orange.svg)]()
 
 A Home Assistant integration that retrieves fire department operations and incident data for Austria. It primarily scrapes the "WASTL" (Warn- und Alarmsystem) information to provide real-time updates on active incidents, deployed fire brigades, and completed missions.
