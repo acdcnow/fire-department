@@ -1,0 +1,39 @@
+type: markdown
+title: 🚒 Deployed Brigades
+content: >
+  {% set entity_id = 'sensor.fire_department_info_eingesetzte_feuerwehren' %}
+
+  <b>Total Deployed:</b> {{ states(entity_id) }}
+
+  <br>
+
+  <table>
+
+  <tr><th align="left">Date</th><th align="left">Time</th><th
+  align="left">Department</th><th align="left">Type</th></tr>
+
+  {% set data = state_attr(entity_id, 'data_list') %}
+
+  {% if states(entity_id) not in ['unavailable', 'unknown'] and data %}
+
+  {% for row in data %}
+
+  <tr>
+
+  <td>{{ row[0] }}</td><td>{{ row[1] }}</td><td>{{ row[2] }}</td><td>{{ row[4]
+  }}</td>
+
+  </tr>
+
+  {% endfor %}
+
+  {% else %}
+
+  <tr><td colspan="4">No brigades currently deployed.</td></tr>
+
+  {% endif %}
+
+  </table>
+grid_options:
+  columns: 18
+  rows: auto
