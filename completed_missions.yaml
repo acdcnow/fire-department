@@ -1,0 +1,35 @@
+type: markdown
+title: 🏁 Completed Missions
+content: >
+  <table>
+
+  <tr><th align="left">Date</th><th align="left">Time</th><th
+  align="left">District</th><th align="left">Location</th><th
+  align="left">Type</th></tr>
+
+  {% set entity_id = 'sensor.fire_department_info_beendete_einsatze' %}
+
+  {% set data = state_attr(entity_id, 'data_list') %}
+
+  {% if states(entity_id) not in ['unavailable', 'unknown'] and data %}
+
+  {% for row in data %}
+
+  <tr>
+
+  <td>{{ row[0] }}</td><td>{{ row[1] }}</td><td>{{ row[2] }}</td><td>{{ row[3]
+  }}</td><td>{{ row[4] }}</td>
+
+  </tr>
+
+  {% endfor %}
+
+  {% else %}
+
+  <tr><td colspan="5">No history data.</td></tr>
+
+  {% endif %}
+    </table>
+grid_options:
+  columns: 18
+  rows: auto
