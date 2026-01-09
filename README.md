@@ -67,6 +67,11 @@ The integration creates the following sensors (entity IDs depend on your configu
 | **Deployed Fire Brigades** | `sensor.fire_department_info_deployed_fire_brigades` | Number of brigades currently in action. |
 | **Completed Missions** | `sensor.fire_department_info_completed_missions` | Number of missions finished recently. |
 
+## Dashboards
+
+* Preconfigured dashboard files for each sensor and the overview map as iframe in folder "dashboard files" copy the yaml code into a blank dashboard.
+* adjust the sensor name based on your needs and results in your devide and entity list.
+
 ### Attributes
 Each sensor contains a `data_list` attribute with the raw parsed rows, useful for displaying in Markdown cards or Flex Table cards.
 
