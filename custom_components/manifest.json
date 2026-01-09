@@ -1,0 +1,9 @@
+{
+  "domain": "fire_department",
+  "name": "Fire Department Info",
+  "config_flow": true,
+  "documentation": "https://www.feuerwehr-krems.at",
+  "requirements": ["beautifulsoup4"],
+  "iot_class": "cloud_polling",
+  "version": "2.1.0"
+}
