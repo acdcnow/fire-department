@@ -69,13 +69,26 @@ class FireDeptOptionsFlowHandler(config_entries.OptionsFlow):
     """Handle options flow."""
 
     def __init__(self, config_entry):
-        self.config_entry = config_entry
-        # SAFETY FIX: Ensure options is a dict even if currently None
-        self.options = dict(config_entry.options) if config_entry.options else {}
-        self.pages = self.options.get(CONF_PAGES, [])
+        """Initialize options flow."""
+        super().__init__()
+        # FIX: Use _config_entry to avoid collision with read-only property 'config_entry'
+        self._config_entry = config_entry 
+        self.options = {}
+        self.pages = []
 
     async def async_step_init(self, user_input=None):
-        """Manage global options."""
+        """Manage global options. Load data here to be safe."""
+        _LOGGER.debug("FireDeptOptionsFlowHandler: async_step_init started")
+        
+        # 1. Safely load options from the stored _config_entry
+        if self._config_entry.options:
+            self.options = dict(self._config_entry.options)
+        else:
+            self.options = {}
+
+        # 2. Load pages safely
+        self.pages = list(self.options.get(CONF_PAGES, []))
+
         return self.async_show_menu(
             step_id="init",
             menu_options=["global_settings", "add_page", "remove_page"]
@@ -99,6 +112,7 @@ class FireDeptOptionsFlowHandler(config_entries.OptionsFlow):
         )
 
     async def async_step_add_page(self, user_input=None):
+        """Add a new page."""
         if user_input is not None:
             new_page = {
                 "name": user_input["name"],
@@ -125,8 +139,10 @@ class FireDeptOptionsFlowHandler(config_entries.OptionsFlow):
         )
 
     async def async_step_remove_page(self, user_input=None):
+        """Remove a page."""
         if user_input is not None:
             removed_indexes = [int(i) for i in user_input["pages_to_remove"]]
+            # Rebuild list excluding removed indexes
             self.pages = [page for idx, page in enumerate(self.pages) if idx not in removed_indexes]
             self.options[CONF_PAGES] = self.pages
             return self.async_create_entry(title="", data=self.options)
@@ -134,8 +150,9 @@ class FireDeptOptionsFlowHandler(config_entries.OptionsFlow):
         if not self.pages:
             return self.async_abort(reason="no_pages")
 
-        options = [
-            selector.SelectOptionDict(value=str(idx), label=f"{p.get('name', 'Page ' + str(idx))}")
+        # Use standard dicts for options (Safest method)
+        options_list = [
+            {"value": str(idx), "label": p.get('name', f"Page {idx}")}
             for idx, p in enumerate(self.pages)
         ]
 
@@ -144,7 +161,7 @@ class FireDeptOptionsFlowHandler(config_entries.OptionsFlow):
             data_schema=vol.Schema({
                 vol.Required("pages_to_remove"): selector.SelectSelector(
                     selector.SelectSelectorConfig(
-                        options=options,
+                        options=options_list,
                         multiple=True,
                         mode=selector.SelectSelectorMode.LIST,
                     )
