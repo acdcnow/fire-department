@@ -78,6 +78,6 @@ Each sensor contains a `data_list` attribute with the raw parsed rows, useful fo
 **Example `data_list` structure:**
 ```json
 [
-  ["09.01.2026", "14:30", "Krems", "Hauptstraße 1", "T1 - Vehicle Recovery"],
+  ["DD.MM.YYYY", "HH:mm", "City", "street 123", "T1 - Vehicle Recovery"],
   ...
 ]
