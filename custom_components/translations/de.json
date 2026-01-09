@@ -1,47 +1,61 @@
 {
-    "config": {
-        "abort": {
-            "already_configured": "Gerät ist bereits konfiguriert",
-            "no_calendars_found": "Keine Kalender in diesem TimeTree-Konto gefunden."
-        },
-        "error": {
-            "invalid_auth": "Benutzername oder Passwort nicht korrekt, bitte überprüfen und anpassen.",
-            "cannot_connect": "Verbindung fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung.",
-            "rate_limit": "Zu viele Anfragen. Bitte warten Sie einen Moment.",
-            "server_error": "TimeTree-Server haben derzeit Probleme (5xx).",
-            "unknown": "Unerwarteter Fehler."
-        },
-        "step": {
-            "user": {
-                "title": "Mit TimeTree verbinden",
-                "description": "Bitte geben Sie Ihre TimeTree-Zugangsdaten ein.",
-                "data": {
-                    "email": "E-Mail-Adresse",
-                    "password": "Passwort"
-                }
-            },
-            "calendar": {
-                "title": "Konfiguration",
-                "description": "Wählen Sie Ihren Kalender und konfigurieren Sie die Synchronisation.",
-                "data": {
-                    "calendar_id": "Kalender",
-                    "scan_interval": "Aktualisierungsintervall (Minuten)",
-                    "days_past": "Historie synchronisieren (Tage in der Vergangenheit)",
-                    "days_future": "Zukunft synchronisieren (Tage in der Zukunft)"
-                }
-            }
+  "config": {
+    "step": {
+      "user": {
+        "title": "Bundesland wählen",
+        "description": "Wählen Sie das Bundesland und das Aktualisierungsintervall.",
+        "data": {
+          "name": "Name",
+          "region": "Bundesland",
+          "update_interval": "Aktualisierung (Minuten)"
         }
-    },
-    "options": {
-        "step": {
-            "init": {
-                "title": "TimeTree Einstellungen",
-                "data": {
-                    "scan_interval": "Aktualisierungsintervall (Minuten)",
-                    "days_past": "Historie synchronisieren (Tage in der Vergangenheit)",
-                    "days_future": "Zukunft synchronisieren (Tage in der Zukunft)"
-                }
-            }
-        }
+      }
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Einstellungen",
+        "menu_options": {
+          "global_settings": "Intervall ändern",
+          "add_page": "Neue Seite hinzufügen",
+          "remove_page": "Seite entfernen"
+        }
+      },
+      "global_settings": {
+        "title": "Aktualisierungsrate",
+        "data": {
+          "update_interval": "Aktualisierung (Minuten)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "active_operations": { "name": "Aktuelle Einsätze" },
+      "deployed_fire_brigade": { "name": "Eingesetzte Feuerwehren" },
+      "completed_missions": { "name": "Beendete Einsätze" }
+    }
+  },
+  "selector": {
+    "region": {
+      "options": {
+        "lower_austria": "Niederösterreich (NÖ)",
+        "upper_austria": "Oberösterreich (OÖ)",
+        "vienna": "Wien",
+        "styria": "Steiermark",
+        "salzburg": "Salzburg",
+        "burgenland": "Burgenland",
+        "carinthia": "Kärnten",
+        "tyrol": "Tirol",
+        "vorarlberg": "Vorarlberg"
+      }
+    },
+    "parser_type": {
+      "options": {
+        "incidents": "Einsatzliste (Aktuell/Historie)",
+        "departments": "Liste Aktiver Feuerwehren"
+      }
+    }
+  }
 }
